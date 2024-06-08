@@ -13,8 +13,9 @@ namespace TCPChat
         /// Главная точка входа для приложения.
         /// </summary>
         [STAThread]
-        static void Main()
+        public static void Main()
         {
+            Control.CheckForIllegalCrossThreadCalls = false;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new ConnectForm());

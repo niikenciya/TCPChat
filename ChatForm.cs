@@ -12,9 +12,18 @@ namespace TCPChat
 {
     public partial class ChatForm : Form
     {
-        public ChatForm()
+        Chat Chat;
+        public ChatForm(Chat chat)
         {
+            Chat = chat;
             InitializeComponent();
+        }
+
+        private void ChatForm_Load(object sender, EventArgs e)
+        {
+            Chat.RichTextBox = richTextBox1;
+            Chat.Connect();
+            this.Visible = false;
         }
     }
 }

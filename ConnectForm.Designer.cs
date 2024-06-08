@@ -47,6 +47,7 @@
             this.ipTxt.Size = new System.Drawing.Size(366, 44);
             this.ipTxt.TabIndex = 1;
             this.ipTxt.Text = "ip сервера";
+            this.ipTxt.TextChanged += new System.EventHandler(this.ipTxt_TextChanged);
             this.ipTxt.Enter += new System.EventHandler(this.textBox1_Enter);
             this.ipTxt.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
