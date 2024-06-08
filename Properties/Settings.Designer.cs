@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TCPChatForm.Properties
+namespace TCPChat.Properties
 {
 
 
