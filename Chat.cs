@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TCPChat
+namespace TCPChatForm
 {
-    public partial class Form1 : Form
+    public partial class ChatForm : Form
     {
-        public Form1()
+        public ChatForm()
         {
             InitializeComponent();
         }
