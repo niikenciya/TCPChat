@@ -6,8 +6,10 @@ using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace TCPChat
 {
@@ -33,8 +35,8 @@ namespace TCPChat
         {
             if (IpHint == ipTxt.Text)
             {
-            ipTxt.Text = "";
-            ipTxt.ForeColor = ForeTextColor;
+                ipTxt.Text = "";
+                ipTxt.ForeColor = ForeTextColor;
             }
         }
         private void textBox1_Leave(object sender, EventArgs e)
@@ -90,18 +92,38 @@ namespace TCPChat
         private void button1_Click(object sender, EventArgs e)
         {
             Chat = new Chat();
-            Chat.Host = ipTxt.Text;
-            try
+            string pattern = @"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$";
+            string input = ipTxt.Text;
+            var matchCount = Regex.Matches(input, pattern).Count;
+
+            if (matchCount == 1)
             {
-                Chat.Port = int.Parse(portTxt.Text);
+                int[] ipBytes = input.Split('.').Select(int.Parse).ToArray();
+
+                if (ipBytes[0]<256 && ipBytes[1]<256 && ipBytes[2] < 256 && ipBytes[3] < 256)
+                {
+                    Chat.Host = ipTxt.Text;
+                    try
+                    {
+                        Chat.Port = int.Parse(portTxt.Text);
+                        Chat.Name = nameTxt.Text;
+                        ChatForm chatForm = new ChatForm(Chat);
+                        chatForm.Show();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Введен некорректный порт", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Введен некорректный ip сервера", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
-            catch (Exception)
+            else
             {
-                MessageBox.Show("Введен некорректный порт", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Введен некорректный ip сервера", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            Chat.Name = nameTxt.Text;
-            ChatForm chatForm = new ChatForm(Chat);
-            chatForm.Show();
         }
 
         private void ipTxt_TextChanged(object sender, EventArgs e)
