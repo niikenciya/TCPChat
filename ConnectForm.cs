@@ -11,33 +11,47 @@ using System.Windows.Forms;
 
 namespace TCPChat
 {
+
     public partial class ConnectForm : Form
     {
         Chat Chat;
+        string IpHint;
+        string PortHint;
+        string NameHint;
+        Color ForeTextColor = Color.White;
+        Color HintTextColor;
+
         public ConnectForm()
         {
             InitializeComponent();
+            IpHint = ipTxt.Text;
+            PortHint = portTxt.Text;
+            NameHint = nameTxt.Text;
+            HintTextColor = ipTxt.ForeColor;
         }
         private void textBox1_Enter(object sender, EventArgs e)
         {
-            if (ipTxt.Text == "ip сервера")
+            if (IpHint == ipTxt.Text)
             {
             ipTxt.Text = "";
+            ipTxt.ForeColor = ForeTextColor;
             }
         }
         private void textBox1_Leave(object sender, EventArgs e)
         {
             if (ipTxt.Text == "")
             {
-                ipTxt.Text = "ip сервера";
+                ipTxt.Text = IpHint;
+                ipTxt.ForeColor = HintTextColor;
             }
         }
 
         private void textBox5_Enter(object sender, EventArgs e)
         {
-            if (portTxt.Text == "порт сервера")
+            if (portTxt.Text == PortHint)
             {
                 portTxt.Text = "";
+                portTxt.ForeColor = ForeTextColor;
             }
         }
 
@@ -45,15 +59,17 @@ namespace TCPChat
         {
             if (portTxt.Text == "")
             {
-                portTxt.Text = "порт сервера";
+                portTxt.Text = PortHint;
+                portTxt.ForeColor = HintTextColor;
             }
         }
 
         private void textBox4_Enter(object sender, EventArgs e)
         {
-            if (nameTxt.Text == "имя")
+            if (nameTxt.Text == NameHint)
             {
                 nameTxt.Text = "";
+                nameTxt.ForeColor = ForeTextColor;
             }
         }
 
@@ -61,7 +77,8 @@ namespace TCPChat
         {
             if (nameTxt.Text == "")
             {
-                nameTxt.Text = "имя";
+                nameTxt.Text = NameHint;
+                nameTxt.ForeColor = HintTextColor;
             }
         }
 
@@ -88,6 +105,16 @@ namespace TCPChat
         }
 
         private void ipTxt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ConnectForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nameTxt_TextChanged(object sender, EventArgs e)
         {
 
         }

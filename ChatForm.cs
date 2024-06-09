@@ -25,5 +25,10 @@ namespace TCPChat
             Chat.Connect();
             this.Visible = false;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
