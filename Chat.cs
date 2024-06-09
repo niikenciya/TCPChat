@@ -34,7 +34,7 @@ namespace TCPChat
             }
             else
             {
-
+                
             }
             listener = new Thread(Listen);
             listener.Start();

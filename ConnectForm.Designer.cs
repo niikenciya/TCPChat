@@ -80,7 +80,7 @@
             this.portTxt.Font = new System.Drawing.Font("Times New Roman", 22F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.portTxt.ForeColor = System.Drawing.Color.Gray;
             this.portTxt.Location = new System.Drawing.Point(12, 62);
-            this.portTxt.MaxLength = 15;
+            this.portTxt.MaxLength = 5;
             this.portTxt.Name = "portTxt";
             this.portTxt.Size = new System.Drawing.Size(245, 34);
             this.portTxt.TabIndex = 2;
