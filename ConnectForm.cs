@@ -106,9 +106,16 @@ namespace TCPChat
                     try
                     {
                         Chat.Port = int.Parse(portTxt.Text);
+                        if (nameTxt.Text != NameHint)
+                        {
                         Chat.Name = nameTxt.Text;
                         ChatForm chatForm = new ChatForm(Chat);
                         chatForm.Show();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Имя не введено", "Подсказка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
                     catch (Exception)
                     {
@@ -133,6 +140,7 @@ namespace TCPChat
 
         private void ConnectForm_Load(object sender, EventArgs e)
         {
+
 
         }
 
