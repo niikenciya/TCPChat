@@ -23,8 +23,15 @@ namespace Client
             var ipEndPoint = new IPEndPoint(IPAddress.Parse(Host), Port);
             TcpClient client = new TcpClient();
             // TODO сервера нет
-
-            client.Connect(ipEndPoint);
+            try
+            {
+                client.Connect(ipEndPoint);
+            }
+            catch
+            {
+                MessageBox.Show("Сервера не существует или он не доступен", "Не удалось подключиться к серверу", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return -1;
+            }
             streamWriter = new StreamWriter(client.GetStream());
             streamReader = new StreamReader(client.GetStream());
             SendName();

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -22,6 +23,7 @@ namespace Client
         string NameHint;
         Color ForeTextColor = Color.White;
         Color HintTextColor;
+        ChatForm chatForm;
 
         public ConnectForm()
         {
@@ -91,46 +93,51 @@ namespace Client
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Chat = new Chat();
-            string pattern = @"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$";
-            string input = ipTxt.Text;
-            var matchCount = Regex.Matches(input, pattern).Count;
+            Loader.Visible = true;
+            Thread waitConnect = new Thread(() => {
+                Chat = new Chat();
+                string pattern = @"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$";
+                string input = ipTxt.Text;
+                var matchCount = Regex.Matches(input, pattern).Count;
 
-            if (matchCount == 1)
-            {
-                int[] ipBytes = input.Split('.').Select(int.Parse).ToArray();
-
-                if (ipBytes[0]<256 && ipBytes[1]<256 && ipBytes[2] < 256 && ipBytes[3] < 256)
+                if (matchCount == 1)
                 {
-                    Chat.Host = ipTxt.Text;
-                    try
+                    int[] ipBytes = input.Split('.').Select(int.Parse).ToArray();
+
+                    if (ipBytes[0] < 256 && ipBytes[1] < 256 && ipBytes[2] < 256 && ipBytes[3] < 256)
                     {
-                        Chat.Port = int.Parse(portTxt.Text);
-                        if (nameTxt.Text != NameHint)
+                        Chat.Host = ipTxt.Text;
+                        try
                         {
-                        Chat.Name = nameTxt.Text;
-                        ChatForm chatForm = new ChatForm(Chat);
-                        chatForm.Show();
+                            Chat.Port = int.Parse(portTxt.Text);
+                            if (nameTxt.Text != NameHint)
+                            {
+                                Chat.Name = nameTxt.Text;
+                                chatForm = new ChatForm(Chat);
+                                chatForm.Show();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Имя не введено", "Подсказка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
                         }
-                        else
+                        catch (Exception)
                         {
-                            MessageBox.Show("Имя не введено", "Подсказка", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Введен некорректный порт", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
-                    catch (Exception)
+                    else
                     {
-                        MessageBox.Show("Введен некорректный порт", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Введен некорректный ip сервера", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 else
                 {
                     MessageBox.Show("Введен некорректный ip сервера", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-            }
-            else
-            {
-                MessageBox.Show("Введен некорректный ip сервера", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+                Loader.Visible = false;
+            });
+            waitConnect.Start();
         }
 
         private void ipTxt_TextChanged(object sender, EventArgs e)

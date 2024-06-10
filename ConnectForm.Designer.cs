@@ -33,6 +33,8 @@
             this.nameTxt = new System.Windows.Forms.TextBox();
             this.portTxt = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.Loader = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.Loader)).BeginInit();
             this.SuspendLayout();
             // 
             // ipTxt
@@ -106,6 +108,20 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // Loader
+            // 
+            this.Loader.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Loader.Image = global::TCPChat.Properties.Resources.Eqjd;
+            this.Loader.Location = new System.Drawing.Point(12, 12);
+            this.Loader.Name = "Loader";
+            this.Loader.Size = new System.Drawing.Size(245, 193);
+            this.Loader.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.Loader.TabIndex = 4;
+            this.Loader.TabStop = false;
+            this.Loader.Visible = false;
+            // 
             // ConnectForm
             // 
             this.AccessibleDescription = "";
@@ -114,6 +130,7 @@
             this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(269, 221);
+            this.Controls.Add(this.Loader);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.portTxt);
             this.Controls.Add(this.nameTxt);
@@ -125,6 +142,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ConnectForm";
             this.Load += new System.EventHandler(this.ConnectForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.Loader)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,6 +154,7 @@
         private System.Windows.Forms.TextBox nameTxt;
         private System.Windows.Forms.TextBox portTxt;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox Loader;
     }
 }
 
