@@ -1,4 +1,4 @@
-﻿namespace TCPChat
+﻿namespace Client
 {
     partial class ConnectForm
     {

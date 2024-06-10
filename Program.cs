@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TCPChat;
+using Client;
 
-namespace TCPChat
+namespace Client
 {
     internal static class Program
     {

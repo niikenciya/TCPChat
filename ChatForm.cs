@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TCPChat
+namespace Client
 {
     public partial class ChatForm : Form
     {

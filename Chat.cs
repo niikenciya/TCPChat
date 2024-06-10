@@ -4,7 +4,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace TCPChat
+namespace Client
 {
     public class Chat
     {
@@ -23,6 +23,7 @@ namespace TCPChat
             var ipEndPoint = new IPEndPoint(IPAddress.Parse(Host), Port);
             TcpClient client = new TcpClient();
             // TODO сервера нет
+
             client.Connect(ipEndPoint);
             streamWriter = new StreamWriter(client.GetStream());
             streamReader = new StreamReader(client.GetStream());
