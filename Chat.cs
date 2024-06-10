@@ -18,10 +18,11 @@ namespace TCPChat
         private Thread listener;
         private delegate void UpdateLogCallback(string log);
 
-        public void Connect()
+        public int Connect()
         {
             var ipEndPoint = new IPEndPoint(IPAddress.Parse(Host), Port);
             TcpClient client = new TcpClient();
+            // TODO сервера нет
             client.Connect(ipEndPoint);
             streamWriter = new StreamWriter(client.GetStream());
             streamReader = new StreamReader(client.GetStream());
@@ -34,10 +35,12 @@ namespace TCPChat
             }
             else
             {
-                
+                MessageBox.Show(serverHello.Split('|')[1], "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return -1;
             }
             listener = new Thread(Listen);
             listener.Start();
+            return 0;
         }
         private void SendName()
         {
@@ -48,6 +51,7 @@ namespace TCPChat
         {
             while (connected)
             {
+                // TODO сервер выключился раньше клиента
                 UpdateLog(streamReader.ReadLine());
             }
         }

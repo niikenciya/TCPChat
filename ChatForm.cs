@@ -22,11 +22,21 @@ namespace TCPChat
         private void ChatForm_Load(object sender, EventArgs e)
         {
             Chat.RichTextBox = richTextBox1;
-            Chat.Connect();
-            this.Visible = false;
+            var code = Chat.Connect();
+            if (code == 0) {
+                this.Visible = false;
+            } 
+            else{
+                this.Close();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
